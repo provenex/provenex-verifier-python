@@ -1,3 +1,11 @@
+> **Note (2026-07): this library verifies the pre-2026 Provenex receipt
+> format from an earlier product iteration.** It does not verify evidence
+> produced by the current Provenex engine (verdicts, enforcement receipts,
+> drift snapshots, control records). For current evidence, use
+> [provenex-verify](https://github.com/provenex/provenex-verify), the open
+> Rust verifier that ships the published verification key set. This
+> repository remains for users of the legacy format.
+
 # provenex-verifier
 
 [![CI](https://github.com/provenex/provenex-verifier-python/actions/workflows/ci.yml/badge.svg)](https://github.com/provenex/provenex-verifier-python/actions/workflows/ci.yml)
