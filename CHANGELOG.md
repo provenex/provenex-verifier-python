@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-11-16
+
+### Changed
+
+* `verify_receipt` accepts a `provenex-core` 1.1.0 `absence_attestation` without warning that `issuer` is missing. Those receipts identify the key in `signer.public_key_pem`. The caller still passes the public key. This check is the signature only. Engine evidence stays with `provenex-verify`.
+
 ## [1.0.0] - 2026-05-25
 
 Initial release.
@@ -23,4 +29,5 @@ Initial release.
 * No dependency on `provenex-core`. The library implements the receipt-format spec directly.
 * Single runtime dependency: `cryptography` (for Ed25519 primitives).
 
+[1.0.1]: https://github.com/provenex/provenex-verifier-python/releases/tag/v1.0.1
 [1.0.0]: https://github.com/provenex/provenex-verifier-python/releases/tag/v1.0.0

@@ -234,7 +234,10 @@ def verify_receipt(
         warnings.append("receipt schema_version is missing or not a string")
     if not isinstance(receipt.get("receipt_id"), str):
         warnings.append("receipt receipt_id is missing or not a string")
-    if not signer_id:
+    if not signer_id and receipt.get("receipt_type") != "absence_attestation":
+        # Absence receipts name the signing key in signer.public_key_pem.
+        # They have no issuer string. The caller still supplies the public
+        # key; the embedded key is not consulted here.
         warnings.append("receipt issuer is missing or not a string")
 
     return VerificationResult(True, signer_id, signed_at, errors, warnings)

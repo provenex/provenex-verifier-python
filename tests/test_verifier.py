@@ -303,6 +303,44 @@ def test_static_hmac_vector_rejected(vectors_dir, load_vector):
 # ---------------------------------------------------------------- end-to-end JSON
 
 
+def test_absence_attestation_verifies_without_an_issuer_warning(
+    sign_receipt, public_key_pem
+):
+    """provenex-core 1.1.0 absence receipts have no issuer field.
+
+    The signature covers the same canonical payload as every other
+    receipt. Checking it does not mean the scan was complete, and it
+    does not authenticate an engine envelope.
+    """
+    receipt = sign_receipt(
+        {
+            "receipt_type": "absence_attestation",
+            "schema_version": "1.0",
+            "receipt_id": "prx_abs_" + "ab" * 16,
+            "issued_at": "2026-11-12T17:49:00.000Z",
+            "verdict": "ABSENT",
+            "results": [
+                {
+                    "fingerprint": "sha256:" + "cd" * 32,
+                    "document_id": "checkout-1",
+                    "verdict": "ABSENT",
+                }
+            ],
+            "stores": [],
+            "files_scanned": 1,
+            "unscanned_files": [],
+            "signer": {"algorithm": "ed25519", "public_key_pem": "ignored-by-this-check"},
+        }
+    )
+    result = verify_receipt(receipt, public_key_pem)
+    assert result.valid, result.errors
+    assert result.signer == ""
+    assert not any("issuer" in w for w in result.warnings)
+    forged = copy.deepcopy(receipt)
+    forged["verdict"] = "PRESENT"
+    assert verify_receipt(forged, public_key_pem).valid is False
+
+
 def test_round_trip_via_json_serialization(signed_receipt, public_key_pem):
     blob = json.dumps(signed_receipt)
     parsed = json.loads(blob)

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "provenex-verifier"
-version = "1.0.0"
+version = "1.0.1"
 description = "Standalone, offline verifier for Provenex receipts. Implements the receipt-format spec; no network, no telemetry, no dependencies on provenex-core."
 readme = "README.md"
 license = { text = "MIT" }

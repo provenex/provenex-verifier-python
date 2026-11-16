@@ -4,7 +4,9 @@
 > drift snapshots, control records). For current evidence, use
 > [provenex-verify](https://github.com/provenex/provenex-verify), the open
 > Rust verifier that ships the published verification key set. This
-> repository remains for users of the legacy format.
+> repository remains for users of the legacy format, including the
+> `absence_attestation` receipts `provenex-core` 1.1.0 signs. `verify_receipt`
+> checks that signature. It does not decide whether the scan was complete.
 
 # provenex-verifier
 
@@ -95,7 +97,7 @@ Test vectors live in [`test-vectors/`](test-vectors/) and are versioned alongsid
 
 ## Stability promise
 
-This library is at **v1.0.0** because the receipt format is. Any change that breaks a previously valid receipt is a breaking change and bumps the major version.
+This library is at **v1.0.1**. The 1.0 line is tied to the receipt format. Any change that breaks a previously valid receipt is a breaking change and bumps the major version.
 
 ## Security
 

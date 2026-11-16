@@ -22,7 +22,7 @@ from .canonical import canonicalize
 from .merkle import verify_inclusion_proof
 from .verifier import VerificationResult, verify_receipt
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 __all__ = [
     "VerificationResult",
